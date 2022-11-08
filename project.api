@@ -1,0 +1,15 @@
+# control.h task.hpp
+!task.cpp graphics.h keys_n_colors.h task.hpp #<#>
+ : hexagon#endif #<task.hpp>
+coords _type_ #<task.hpp>
+hexagon _type_ #<task.hpp>
+hexagon(int x, int y) #<task.hpp>
+	coords::x : int #<task.hpp>
+	coords::y : int #<task.hpp>
+	hexagon:%center : coords #<task.hpp>
+	hexagon:%r : int #<task.hpp>
+	hexagon::hexagon_remove() -> void #<task.hpp>
+	hexagon::hexagon_draw() -> void #<task.hpp>
+	hexagon::move(int type) -> void #<task.hpp>
+	hexagon::rotate(int direction) -> void #<task.hpp>
+	hexagon::change_size(int direction) -> void #<task.hpp>
