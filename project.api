@@ -1,15 +1,38 @@
 # control.h task.hpp
-!task.cpp graphics.h keys_n_colors.h task.hpp #<#>
- : hexagon#endif #<task.hpp>
+!control.cpp control.h graphics.h keys_n_colors.h #<#>
+!main.cpp cctype cerrno clocale control.h cstdint cstdio cstdlib ctype.h cwchar cwctype errno.h exception fstream graphics.h initializer_list ios iosfwd iostream istream keys_n_colors.h limits limits.h locale.h new ostream signal.h stddef.h stdexcept stdint.h stdio.h stdlib.h streambuf string string_view system_error task.hpp type_traits typeinfo wchar.h wctype.h #<#>
+!task.cpp graphics.h keys_n_colors.h math.h task.hpp #<#>
+ struct@button _type_ #<control.h>
+Buttons : button[] #<control.cpp>
+CONTROLS : enum #<control.h>
+HEIGHT #<task.hpp>
+WIDTH #<task.hpp>
+_USE_MATH_DEFINES #<task.cpp>
 coords _type_ #<task.hpp>
+create_bg(const char* file_name) -> void #<control.cpp>
+create_bg(const char*) -> void #<control.h>
+create_button(int i, int x, int y) -> void #<control.cpp>
+create_button(int, int, int) -> void #<control.h>
+dx #<control.h>
+dy #<control.h>
 hexagon _type_ #<task.hpp>
-hexagon(int x, int y) #<task.hpp>
+hexagon(int x, int y, int rad) #<task.hpp>
+main() -> int #<main.cpp>
+save() -> void #<task.hpp>
+select_control() -> int #<control.h>
+	button::x0 : int #<control.h>
+	button::y0 : int #<control.h>
 	coords::x : int #<task.hpp>
 	coords::y : int #<task.hpp>
 	hexagon:%center : coords #<task.hpp>
+	hexagon:%external : coords[] #<task.hpp>
 	hexagon:%r : int #<task.hpp>
+	hexagon:%calc_external_coords() -> void #<task.hpp>
 	hexagon::hexagon_remove() -> void #<task.hpp>
 	hexagon::hexagon_draw() -> void #<task.hpp>
-	hexagon::move(int type) -> void #<task.hpp>
+	hexagon::move(int direction) -> void #<task.hpp>
 	hexagon::rotate(int direction) -> void #<task.hpp>
 	hexagon::change_size(int direction) -> void #<task.hpp>
+	hexagon::help(int type) -> void #<task.hpp>
+	hexagon::error() -> void #<task.hpp>
+	hexagon::in_field(int dx) -> bool #<task.hpp>
