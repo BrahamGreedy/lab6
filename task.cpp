@@ -45,8 +45,14 @@ void hexagon::move(int direction){//direction: 0-up, 1-down equals for left and 
    }
 }
 
-void hexagon::rotate(int direction){
-   //how?
+void hexagon::rotate(int direction){//direction: 0 - rotate left, 1 - rotate right
+   int d[2] = {1, -1};
+   hexagon_remove();
+   for(int i=0; i < 6; i++){
+      external[i].x = center.x+(-center.x+external[i].x)*cos(d[direction]*M_PI/12)+(center.y-external[i].y)*sin(d[direction]*M_PI/12);
+      external[i].y = center.y+(-center.x+external[i].x)*sin(d[direction]*M_PI/12)+(-center.y+external[i].y)*cos(d[direction]*M_PI/12);
+   }
+   hexagon_draw();
 }
 
 void hexagon::change_size(int direction){

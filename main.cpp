@@ -46,10 +46,10 @@ int main(){
             case 2:
                switch(getch(kbhit())){
                   case KEY_LEFT:
-                     
+                     a.rotate(0);
                      break;
                   case KEY_RIGHT:
-                     
+                     a.rotate(1);
                      break;
                }
                break;

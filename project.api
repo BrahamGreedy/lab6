@@ -1,6 +1,6 @@
 # control.h task.hpp
 !control.cpp control.h graphics.h keys_n_colors.h #<#>
-!main.cpp cctype cerrno clocale control.h cstdint cstdio cstdlib ctype.h cwchar cwctype errno.h exception fstream graphics.h initializer_list ios iosfwd iostream istream keys_n_colors.h limits limits.h locale.h new ostream signal.h stddef.h stdexcept stdint.h stdio.h stdlib.h streambuf string string_view system_error task.hpp type_traits typeinfo wchar.h wctype.h #<#>
+!main.cpp control.h fstream graphics.h iostream keys_n_colors.h task.hpp #<#>
 !task.cpp graphics.h keys_n_colors.h math.h task.hpp #<#>
  struct@button _type_ #<control.h>
 Buttons : button[] #<control.cpp>
