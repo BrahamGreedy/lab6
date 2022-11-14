@@ -4,8 +4,8 @@
 #define WIDTH 1000
 
 struct coords{
-   int x;
-   int y;
+   double x;
+   double y;
 };
 
 class hexagon{
@@ -15,7 +15,7 @@ class hexagon{
       int r;
       void calc_external_coords();
    public:
-      hexagon(int x, int y, int rad);
+      hexagon(double x, double y, int rad);
       void hexagon_remove();
       void hexagon_draw();
       void move(int direction);

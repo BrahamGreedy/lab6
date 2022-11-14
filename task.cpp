@@ -3,7 +3,7 @@
 #include <task.hpp>
 #include <math.h>
 
-hexagon::hexagon(int x, int y, int rad){
+hexagon::hexagon(double x, double y, int rad){
    center.x = x;
    center.y = y;
    r = rad;
@@ -36,9 +36,11 @@ void hexagon::hexagon_remove(){
 void hexagon::move(int direction){//direction: 0-up, 1-down equals for left and right it's realised with %2
    int d[2] = {-2, 2};
    if(in_field(d[direction%2])){
-      direction<2?center.y+=d[direction%2]:center.x+=d[direction%2];
       hexagon_remove();
-      calc_external_coords();
+      direction<2?center.y+=d[direction%2]:center.x+=d[direction%2];
+      for(int i = 0; i<6; i++){
+         direction<2?external[i].y+=d[direction%2]:external[i].x+=d[direction%2];
+      }
       hexagon_draw();
    }else{
       error();
@@ -57,10 +59,11 @@ void hexagon::rotate(int direction){//direction: 0 - rotate left, 1 - rotate rig
 
 void hexagon::change_size(int direction){
    int d[2] = {-2, 2};
+   hexagon_remove();
    if(in_field(d[direction])){
       r+=d[direction];
-      hexagon_remove();
-      calc_external_coords();
+      
+      //calc_external_coords();
       hexagon_draw();
    }else{
       error();

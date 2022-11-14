@@ -7,7 +7,8 @@
 using namespace std;
 
 int main(){
-   int type = 0, radius, x0, y0;//type: 0-не нажата никая кнопка, 1-move, 2-rotate, 3-resize
+   int type = 0, radius;//type: 0-не нажата никая кнопка, 1-move, 2-rotate, 3-resize
+   double x0, y0;
    ifstream file;
    file.open("info_for_figure.txt");
    file >> radius >> x0 >> y0;

@@ -1,6 +1,6 @@
 # control.h task.hpp
 !control.cpp control.h graphics.h keys_n_colors.h #<#>
-!main.cpp control.h fstream graphics.h iostream keys_n_colors.h task.hpp #<#>
+!main.cpp cctype cerrno clocale control.h cstdint cstdio cstdlib ctype.h cwchar cwctype errno.h exception fstream graphics.h initializer_list ios iosfwd iostream istream keys_n_colors.h limits limits.h locale.h new ostream signal.h stddef.h stdexcept stdint.h stdio.h stdlib.h streambuf string string_view system_error task.hpp type_traits typeinfo wchar.h wctype.h #<#>
 !task.cpp graphics.h keys_n_colors.h math.h task.hpp #<#>
  struct@button _type_ #<control.h>
 Buttons : button[] #<control.cpp>
@@ -16,14 +16,14 @@ create_button(int, int, int) -> void #<control.h>
 dx #<control.h>
 dy #<control.h>
 hexagon _type_ #<task.hpp>
-hexagon(int x, int y, int rad) #<task.hpp>
+hexagon(double x, double y, int rad) #<task.hpp>
 main() -> int #<main.cpp>
 save() -> void #<task.hpp>
 select_control() -> int #<control.h>
 	button::x0 : int #<control.h>
 	button::y0 : int #<control.h>
-	coords::x : int #<task.hpp>
-	coords::y : int #<task.hpp>
+	coords::x : double #<task.hpp>
+	coords::y : double #<task.hpp>
 	hexagon:%center : coords #<task.hpp>
 	hexagon:%external : coords[] #<task.hpp>
 	hexagon:%r : int #<task.hpp>
