@@ -47,12 +47,29 @@ void hexagon::move(int direction){//direction: 0-up, 1-down equals for left and 
    }
 }
 
-void hexagon::rotate(int direction){//direction: 0 - rotate left, 1 - rotate right
+void hexagon::rotate(int direction, int type){//direction: 0 - rotate left, 1 - rotate right
    int d[2] = {1, -1};
    hexagon_remove();
-   for(int i=0; i < 6; i++){
-      external[i].x = center.x+(-center.x+external[i].x)*cos(d[direction]*M_PI/12)+(center.y-external[i].y)*sin(d[direction]*M_PI/12);
-      external[i].y = center.y+(-center.x+external[i].x)*sin(d[direction]*M_PI/12)+(-center.y+external[i].y)*cos(d[direction]*M_PI/12);
+   coords temp;
+   int reduce = 0;
+   rot>0?reduce = -1:reduce=1;
+   if(type == 0){
+      rot += d[direction];
+      for(int i=0; i < 6; i++){
+         temp.x = center.x+(-center.x+external[i].x)*cos(d[direction]*M_PI/12)+(center.y-external[i].y)*sin(d[direction]*M_PI/12);
+         temp.y = center.y+(-center.x+external[i].x)*sin(d[direction]*M_PI/12)+(-center.y+external[i].y)*cos(d[direction]*M_PI/12);
+         external[i] = temp;
+      }
+   }else{
+      int temp_rot = rot;
+      while(temp_rot != 0){
+         for(int i=0; i < 6; i++){
+            temp.x = center.x+(-center.x+external[i].x)*cos(-reduce*M_PI/12)+(center.y-external[i].y)*sin(-reduce*M_PI/12);
+            temp.y = center.y+(-center.x+external[i].x)*sin(-reduce*M_PI/12)+(-center.y+external[i].y)*cos(-reduce*M_PI/12);
+            external[i] = temp;
+         }
+         temp_rot += reduce;
+      }
    }
    hexagon_draw();
 }
@@ -62,9 +79,8 @@ void hexagon::change_size(int direction){
    hexagon_remove();
    if(in_field(d[direction])){
       r+=d[direction];
-      
-      //calc_external_coords();
-      hexagon_draw();
+      calc_external_coords();
+      rotate(0, 1);
    }else{
       error();
    }

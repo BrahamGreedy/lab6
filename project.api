@@ -27,11 +27,12 @@ select_control() -> int #<control.h>
 	hexagon:%center : coords #<task.hpp>
 	hexagon:%external : coords[] #<task.hpp>
 	hexagon:%r : int #<task.hpp>
+	hexagon:%rot : int #<task.hpp>
 	hexagon:%calc_external_coords() -> void #<task.hpp>
 	hexagon::hexagon_remove() -> void #<task.hpp>
 	hexagon::hexagon_draw() -> void #<task.hpp>
 	hexagon::move(int direction) -> void #<task.hpp>
-	hexagon::rotate(int direction) -> void #<task.hpp>
+	hexagon::rotate(int direction, int type) -> void #<task.hpp>
 	hexagon::change_size(int direction) -> void #<task.hpp>
 	hexagon::help(int type) -> void #<task.hpp>
 	hexagon::error() -> void #<task.hpp>
