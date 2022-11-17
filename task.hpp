@@ -11,7 +11,7 @@ struct coords{
 class Figure{
    private:
       coords center;
-      coords external[6];
+      coords *external;
       int r;
       int n;
       int rot=0;

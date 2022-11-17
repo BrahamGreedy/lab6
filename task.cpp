@@ -6,6 +6,7 @@
 Figure::Figure(int rad, int N){
    r = rad;
    n = N;
+   external = new coords[n];
 }
 
 void Figure::set_external(int i, coords temp){

@@ -21,7 +21,7 @@ main() -> int #<main.cpp>
 save() -> void #<task.hpp>
 select_control() -> int #<control.h>
 	Figure:%center : coords #<task.hpp>
-	Figure:%external : coords[] #<task.hpp>
+	Figure:%external : coords* #<task.hpp>
 	Figure:%r : int #<task.hpp>
 	Figure:%n : int #<task.hpp>
 	Figure:%rot : int #<task.hpp>
