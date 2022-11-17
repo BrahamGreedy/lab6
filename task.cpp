@@ -3,59 +3,72 @@
 #include <task.hpp>
 #include <math.h>
 
-hexagon::hexagon(double x, double y, int rad){
-   center.x = x;
-   center.y = y;
+Figure::Figure(int rad, int N){
    r = rad;
-   calc_external_coords();
+   n = N;
 }
 
-void hexagon::calc_external_coords(){
+void Figure::set_external(int i, coords temp){
+   external[i].x = temp.x;
+   external[i].y = temp.y;
+}
+
+void Figure::calc_external_coords(){
    double theta = 0.0;
-   for(int i = 0; i<6; i++){
+   for(int i = 0; i<n; i++){
       external[i].x = center.x + r*cos(theta);
       external[i].y = center.y + r*sin(theta);
       theta+=M_PI/3;
    }
 }
 
-void hexagon::hexagon_draw(){
-   for(int i = 0; i<6; i++){
-      line(external[i].x, external[i].y, external[(i+1)%6].x, external[(i+1)%6].y);
+void Figure::calc_center(){
+   int temp_x = 0, temp_y = 0;
+   for(int i=0; i<n; i++){
+      temp_x += external[i].x;
+      temp_y += external[i].y;
+   }
+   center.x = temp_x/n;
+   center.y = temp_y/n;
+}
+
+void Figure::draw(){
+   for(int i = 0; i<n; i++){
+      line(external[i].x, external[i].y, external[(i+1)%n].x, external[(i+1)%n].y);
    }
 }
 
-void hexagon::hexagon_remove(){
+void Figure::remove(){
    setcolor(COLOR(235, 245, 238));
-   for(int i = 0; i<6; i++){
-      line(external[i].x, external[i].y, external[(i+1)%6].x, external[(i+1)%6].y);
+   for(int i = 0; i<n; i++){
+      line(external[i].x, external[i].y, external[(i+1)%n].x, external[(i+1)%n].y);
    }
    setcolor(COLOR(70, 35, 122));
 }
 
-void hexagon::move(int direction){//direction: 0-up, 1-down equals for left and right it's realised with %2
+void Figure::move(int direction){//direction: 0-up, 1-down equals for left and right it's realised with %2
    int d[2] = {-2, 2};
    if(in_field(d[direction%2])){
-      hexagon_remove();
+      remove();
       direction<2?center.y+=d[direction%2]:center.x+=d[direction%2];
-      for(int i = 0; i<6; i++){
+      for(int i = 0; i<n; i++){
          direction<2?external[i].y+=d[direction%2]:external[i].x+=d[direction%2];
       }
-      hexagon_draw();
+      draw();
    }else{
       error();
    }
 }
 
-void hexagon::rotate(int direction, int type){//direction: 0 - rotate left, 1 - rotate right
+void Figure::rotate(int direction, int type){//direction: 0 - rotate left, 1 - rotate right
    int d[2] = {1, -1};
-   hexagon_remove();
+   remove();
    coords temp;
    int reduce = 0;
    rot>0?reduce = -1:reduce=1;
    if(type == 0){
       rot += d[direction];
-      for(int i=0; i < 6; i++){
+      for(int i=0; i < n; i++){
          temp.x = center.x+(-center.x+external[i].x)*cos(d[direction]*M_PI/12)+(center.y-external[i].y)*sin(d[direction]*M_PI/12);
          temp.y = center.y+(-center.x+external[i].x)*sin(d[direction]*M_PI/12)+(-center.y+external[i].y)*cos(d[direction]*M_PI/12);
          external[i] = temp;
@@ -63,7 +76,7 @@ void hexagon::rotate(int direction, int type){//direction: 0 - rotate left, 1 - 
    }else{
       int temp_rot = rot;
       while(temp_rot != 0){
-         for(int i=0; i < 6; i++){
+         for(int i=0; i < n; i++){
             temp.x = center.x+(-center.x+external[i].x)*cos(-reduce*M_PI/12)+(center.y-external[i].y)*sin(-reduce*M_PI/12);
             temp.y = center.y+(-center.x+external[i].x)*sin(-reduce*M_PI/12)+(-center.y+external[i].y)*cos(-reduce*M_PI/12);
             external[i] = temp;
@@ -71,12 +84,12 @@ void hexagon::rotate(int direction, int type){//direction: 0 - rotate left, 1 - 
          temp_rot += reduce;
       }
    }
-   hexagon_draw();
+   draw();
 }
 
-void hexagon::change_size(int direction){
+void Figure::change_size(int direction){
    int d[2] = {-2, 2};
-   hexagon_remove();
+   remove();
    if(in_field(d[direction])){
       r+=d[direction];
       calc_external_coords();
@@ -86,7 +99,7 @@ void hexagon::change_size(int direction){
    }
 }
 
-void hexagon::help(int type){//type: 0-about program, 1-move, 2-rotate, 3-change_size
+void Figure::help(int type){//type: 0-about program, 1-move, 2-rotate, 3-change_size
    setbkcolor(COLOR(61, 220, 151));
    bar(670, 45, 1000, 370); 
    switch(type){
@@ -115,7 +128,7 @@ void hexagon::help(int type){//type: 0-about program, 1-move, 2-rotate, 3-change
    setbkcolor(COLOR(235, 245, 238));
 }
 
-void hexagon::error(){
+void Figure::error(){
    setcolor(RED);
    outtextxy(675, 5, "ERROR!!");
    delay(150);
@@ -123,8 +136,8 @@ void hexagon::error(){
    setcolor(COLOR(70, 35, 122));
 }
 
-bool hexagon::in_field(int dl){
-   for(int i=0; i<6; i++){
+bool Figure::in_field(int dl){
+   for(int i=0; i<n; i++){
       if(external[i].x + dl*10 >= 638) return false;
       if(external[i].x - dl*10 < 0) return false;
    }

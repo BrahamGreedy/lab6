@@ -1,18 +1,27 @@
 #include <iostream>
 #include <graphics.h>
 #include <task.hpp>
+#include <math.h>
 #include <control.h>
 #include <fstream>
 
 using namespace std;
 
 int main(){
-   int type = 0, radius;//type: 0-не нажата никая кнопка, 1-move, 2-rotate, 3-resize
-   double x0, y0;
+   int type = 0, radius, n;//type: 0-не нажата никая кнопка, 1-move, 2-rotate, 3-resize
+   
    ifstream file;
    file.open("info_for_figure.txt");
-   file >> radius >> x0 >> y0;
-   hexagon a = hexagon(x0, y0, radius);
+   file >> n;
+   coords temp[n];
+   for(int i=0; i<n; i++){
+      file >> temp[i].x >> temp[i].y;
+   }
+   Figure a = Figure(fabs(temp[0].x-temp[5].x)/2, n);
+   for(int i=0; i<n; i++){
+      a.set_external(i, temp[i]);
+   }
+   a.calc_center();
    initwindow(WIDTH, HEIGHT, "well...");
    create_bg("bg.jpg");
    create_button(MOVE, 657, 378);
@@ -23,7 +32,7 @@ int main(){
    setbkcolor(COLOR(235, 245, 238));
    setcolor(COLOR(70, 35, 122));
    setfillstyle(SOLID_FILL, COLOR(61, 220, 151));
-   a.hexagon_draw();
+   a.draw();
    a.help(0);
    while(1){
       while(mousebuttons() != 1){

@@ -4,21 +4,24 @@
 #define WIDTH 1000
 
 struct coords{
-   double x;
-   double y;
+   int x;
+   int y;
 };
 
-class hexagon{
+class Figure{
    private:
       coords center;
       coords external[6];
       int r;
+      int n;
       int rot=0;
       void calc_external_coords();
    public:
-      hexagon(double x, double y, int rad);
-      void hexagon_remove();
-      void hexagon_draw();
+      Figure(int rad, int N);
+      void set_external(int, coords);
+      void calc_center();
+      void remove();
+      void draw();
       void move(int direction);
       void rotate(int direction, int type);
       void change_size(int direction);
