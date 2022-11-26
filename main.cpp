@@ -12,10 +12,10 @@ int main(){
    
    ifstream file;
    file.open("info_for_figure.txt");
-   file >> n;
+   file >> n;//get number of vertex
    coords temp[n];
    for(int i=0; i<n; i++){
-      file >> temp[i].x >> temp[i].y;
+      file >> temp[i].x >> temp[i].y;//get coords of vertex from file
    }
    Figure a = Figure(fabs(temp[0].x-temp[5].x)/2, n);
    for(int i=0; i<n; i++){
